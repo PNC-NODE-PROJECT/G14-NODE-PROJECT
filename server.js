@@ -1,11 +1,13 @@
-require('dotenv').config()
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
+const fs = require('fs');
 const app = express();
-const { v4: uuidv4 } = require('uuid');
-const PORT=process.env.PORT || 3000;
-const questionRouter = require('./routes/questions_route')
-
+const PORT = process.env.PORT || 3000
 app.use(express.json());
-app.listen(PORT,()=>console.log("listening on port:"+PORT));
 
-app.use('/api/questions', questionRouter)
+app.listen(PORT, () => {
+    console.log('listening on port ' + PORT)
+})
+
+const listOfQuestionRouter = require('./routers/questions_router');
+app.use("/api/questions", listOfQuestionRouter);

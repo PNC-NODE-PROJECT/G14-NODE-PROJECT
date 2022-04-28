@@ -16,73 +16,62 @@ let readFile = (filename) => JSON.parse(fs.readFileSync(filename))
  */
 let writeFile = (filename, data) => fs.writeFileSync(filename, JSON.stringify(data))
 
+let path = './data/questions_data.json'
 
 /**
  * 
- * @param {*} questions
+ * @param {*} question 
  * @returns 
  */
 let addQuestion = (question) => {
-    let questions = readFile('./data/questions_data.json')
-    let status = false
-    if (questions.questionTitle !== undefined ) {
+    let status = false;
+    let questions = readFile(path);
+    let questionTitle = question.questionTitle;
+    let answer = question.answers;
+    let correctAnswer = question.correctAnswer;
+    if (questionTitle !== undefined && answer !== undefined && correctAnswer !== undefined) {
         let newQuestion = {
-            'id': uuidv4(),
-            'questionTitle': questions.questionTitle,
-            // 'answerA': question.answer.a
+            "id": uuidv4(),
+            "questionTitle": questionTitle,
+            "answerTitle": answer,
+            "correctAnswer": correctAnswer
         }
-        console.log(questions)
-        questions.push(newQuestion)
-        writeFile('./data/questions_data.json', questions)
-        status = true
+        questions.push(newQuestion);
+        writeFile(path, questions);
+        status = true;
     }
     return status
 
 }
 
+/**
+ * @param {*} id
+ * @returns 
+ */
 let removeQuestion = (id) => {
-    let questions = readFile('./data/questions_data.json')
+    let questions = readFile(path)
     let status = false
     let index = questions.findIndex(question => question.id === id)
     if (index !== -1) {
         questions.splice(index, 1)
         status = true
     }
-    writeFile('./data/questions_data.json', questions)
+    writeFile(path, questions)
     return status
 }
 
-let updateQuestion = (question, id) => {
-    let questions = readFile('./data/questions_data.json')
-    let index = questions.findIndex(question => question.id === id)
-    let status = false
-    if (index !== -1) {
-        let newQuestion = questions[index]
-        if (question.questionTitle !== undefined) {
-            newQuestion.questionTitle = question.questionTitle
-        }
-        if (question.price !== undefined) {
-            newQuestion.price = question.price
-        }
-        
-        status = true
-    }
-    writeFile('./data/questions_data.json', questions)
-    return status
-}
 
 /**
  * 
  * @returns 
  */
-let getQuestion = () => readFile('./data/questions_data.json')
+let getQuestion = () => readFile(path)
 
 
 module.exports = {
     readFile,
-    addQuestion,
     writeFile,
-    removeQuestion,
-    updateQuestion,
-    getQuestion
+    getQuestion,
+    addQuestion,
+    removeQuestion
 }
