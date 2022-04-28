@@ -74,7 +74,7 @@ let removeQuestion = (id) => {
             newQuestion.questionTitle = question.questionTitle
         }
         if (question.answers !== undefined) {
-            newQuestion.answer = question.answers
+            newQuestion.answers = question.answers
         }
         if (question.correctAnswer !== undefined) {
             newQuestion.correctAnswer = question.correctAnswer
