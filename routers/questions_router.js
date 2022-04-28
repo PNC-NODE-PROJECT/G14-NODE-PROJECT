@@ -51,4 +51,24 @@ router.delete("/:id", (req, res) => {
     }
 })
 
+/**
+ * Update the question in the  object store
+ * @param req: request the id of the object
+ * @param res: response to the message it success or question id not found
+ */
+ router.patch("/:id", (req, res) => {
+    let id = req.params.id
+    let isUpdateQuestion = questionModel.updateQuestion(req.body,id)
+    if (isUpdateQuestion) {
+        res.status(200).send({
+            "message": 'Item updated successfully'
+        })
+    } else {
+        res.status(404).send({
+            "message": 'Item id not found'
+        })
+    }
+})
+
+
 module.exports = router;

@@ -60,6 +60,34 @@ let removeQuestion = (id) => {
     return status
 }
 
+/**
+ * @param {*} id
+ * @returns 
+ */
+ let updateQuestion = (question, id) => {
+    let questions = readFile(path)
+    let index = questions.findIndex(question => question.id === id)
+    let status = false
+    if (index !== -1) {
+        let newQuestion = questions[index];
+        if (question.questionTitle !== undefined) {
+            newQuestion.questionTitle = question.questionTitle
+        }
+        if (question.answers !== undefined) {
+            newQuestion.answer = question.answers
+        }
+        if (question.correctAnswer !== undefined) {
+            newQuestion.correctAnswer = question.correctAnswer
+        }
+        
+        status = true
+    }
+    writeFile(path, questions)
+    return status
+}
+
+
+
 
 /**
  * 
@@ -73,5 +101,6 @@ module.exports = {
     writeFile,
     getQuestion,
     addQuestion,
-    removeQuestion
+    removeQuestion,
+    updateQuestion
 }
