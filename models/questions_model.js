@@ -4,7 +4,7 @@ const {
 } = require('uuid');
 /**
  * 
- * @param {*} filename 
+ * @param {*} filename
  * @returns 
  */
 let readFile = (filename) => JSON.parse(fs.readFileSync(filename))
