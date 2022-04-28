@@ -31,4 +31,24 @@ router.post("/", (req, res) => {
     }
 })
 
+/**
+ * delete the question from the data
+ * @param req: request id in the object
+ * @param res: respone the message success or id not found
+ */
+router.delete("/:id", (req, res) => {
+    let id = req.params.id
+    let isDeleteQuestion = questionModel.removeQuestion(id)
+
+    if (isDeleteQuestion) {
+        res.status(200).send({
+            "message": 'Question deleted successfully'
+        })
+    } else {
+        res.status(404).send({
+            "message": 'Question id not found'
+        })
+    }
+})
+
 module.exports = router;

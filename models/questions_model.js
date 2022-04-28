@@ -39,11 +39,26 @@ let addQuestion = (question) => {
         questions.push(newQuestion);
         writeFile(path, questions);
         status = true;
-    } 
+    }
     return status
 
 }
 
+/**
+ * @param {*} id
+ * @returns 
+ */
+let removeQuestion = (id) => {
+    let questions = readFile(path)
+    let status = false
+    let index = questions.findIndex(question => question.id === id)
+    if (index !== -1) {
+        questions.splice(index, 1)
+        status = true
+    }
+    writeFile(path, questions)
+    return status
+}
 
 
 /**
@@ -57,5 +72,6 @@ module.exports = {
     readFile,
     writeFile,
     getQuestion,
-    addQuestion
+    addQuestion,
+    removeQuestion
 }
