@@ -182,7 +182,9 @@ function showAndHide(event){
         show_Quiz.style.borderBottom = "none";
     }
 }
-
+function startQuiz(event){
+    event.preventDefault();
+}
 function hideQuetionAndgQuiz(event){
     event.preventDefault();
     var containers=document.querySelector('.container');

@@ -8,5 +8,4 @@ const questionRouter = require('./routes/questions_route')
 app.use(express.json());
 app.listen(PORT,()=>console.log("listening on port:"+PORT));
 
-
 app.use('/api/questions', questionRouter)
