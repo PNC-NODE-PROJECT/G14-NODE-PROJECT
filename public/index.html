@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App </title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <img src="images/pnc.png" alt="">
+        </ul>
+        <ul>
+            <li class="active" id="create_question"><a href="index.html">Edit Quiz</a></li>
+            <li id="play_quiz"><a href="">Play quiz</a></li>
+        </ul>
+    </nav>
+    <button id="btnAdd">Add Question</button>
+    <form class="formToAdd">
+        <label>Question </label>
+        <input type="text" name="questiontext" id="questiontext" placeholder="fill your question...">
+        <p class="alert">Please check again something is not complete or wrong ....???</p>
+        <br>
+        <label>Answer </label>
+        <br>
+        <label>a .</label>
+        <input type="text" name="answer1" id="answer1" placeholder="first answer...">
+        <br>
+        <label>b .</label>
+        <input type="text" name="answer2" id="answer2" placeholder="second answer...">
+        <br>
+        <label>c .</label>
+        <input type="text" name="answer3" id="answer3" placeholder="third answer...">
+        <br>
+        <label>d .</label>
+        <input type="text" name="answer4" id="answer4" placeholder="fourth answer...">
+        <br>
+        <label for="">Corect Answer :</label>
+        <!-- <input type="text" name="corectAnswer" id="corectAnswer" placeholder="corect answer..." required> -->
+        <select name="corectAnswer" id="corectAnswer">
+            <option value="" id="option1">a</option>
+            <option value="" id="option2">b</option>
+            <option value="" id="option3">c</option>
+            <option value="" id="option4">d</option>
+        </select>
+        <br>
+        <button class="addlist">Add to list</button>
+        <button id="cancel">cancel</button>
+    </form>
+<!-- User Name For input their name -->
+<div class="userName">
+    <div class="title">
+        <h2>Your Name </h2>
+        <input type="text" name="name" placeholder="Fill your name"> 
+    </div>
+    <div class="header">
+        <div class="header_Quiz">
+            <h3>Your Score: </h1>
+            <h3 class="score"> 0</h1>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/main.js"></script>
+</html>

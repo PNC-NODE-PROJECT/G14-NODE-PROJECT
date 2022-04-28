@@ -1,0 +1,258 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+/* __Menu__ */
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+ul img{
+    margin-left: 30px;
+}
+img{
+    width: 140px;
+}
+ul{
+    display: flex;
+    margin-top: 1%;
+    margin-right: 3%;
+    margin-bottom: 1%;
+
+}
+ul li{
+    list-style: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+ul li a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);   
+}
+ul li:hover {
+    transition: 0.9s ease;
+    border-radius: 5px;
+    background-color: #000000;
+    border: none;
+}
+ul li a:hover{
+    color: white;
+}
+ul h2{
+    margin-top: 5px;
+}
+/* _____Display Questions_____________________________ */
+ol{
+    width: 60%;
+    border: 3px solid black ;
+    border-radius: 10px;
+    list-style: none;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    padding: 10px;
+
+}
+ol li{
+    margin-left: 10%;
+    padding: 5px;
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    margin-bottom: 30px;
+    background-color: #000000;
+}
+ol li label{
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+}
+.questionTitle{
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    color: white;
+    background-color: #000000;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 40px;
+}
+ol li label {
+    display: flex;
+    font-size: 22px;
+}
+/* ____Add Question_____________________________ */
+#btnAdd{
+    margin-left: 70%;
+    margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #000000;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#cancel,.addlist{
+    width: 18%;
+    height: 5vh;
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    color: white;
+    font-size: 15px;
+}
+.iconDelete{
+    margin-right: -3px;
+    margin-top: -2px;
+    font-size: 1.5rem;
+}
+.iconEdit{
+    color: white;
+    font-size: 1.5rem;
+}
+/* ----form add question------------------------ */
+.formToAdd{
+    width: 60%;
+    height: auto;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    border: 3px solid black;
+}
+.formToAdd input[type='text']{
+    padding: 10px;
+    margin: 10px;
+    width: 94%;
+    border-radius: 5px;
+    font-size: large;
+    color: white;
+}
+.formToAdd p{
+    font-size: 1rem;
+    margin-left: 20px;
+}
+.mycontainer{
+    width: 100%;
+    height: auto;
+}
+label{
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    width: 100%;
+    color: #000000;
+    font-size: 1.5rem;
+}
+.containersQuiz ol{
+    width: 90%;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 10px;
+    border: none;
+    list-style: none;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px;
+}
+.addlist , .btn-submit{
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    margin-top: 15px;
+    margin-left: 60%;
+    cursor: pointer;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+#questiontext,#answer1,#answer2,#answer3,#answer4{
+    background-color: #000000;
+    color: #fff;
+    height: 1vh;
+}
+#corectAnswer{
+    background-color: #000000;
+    color: white;
+    width: 30%;
+    height: 4vh;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    margin-left: 1.5%;
+}
+/* ___Play Quiz username____________________________________ */
+.userName{
+    width: 64%;
+    height: 300%;
+    border: 1px solid ;
+    border: none;
+    margin: auto;
+    margin-top: 20px;
+}
+.title{
+    width: 94%;
+    margin: auto;
+    height: 15vh;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 5%;
+}
+.title h2{
+    height: 5vh;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: #000000 ;
+    padding: 10px;
+    margin-bottom: 1px;
+}
+.title input[type="text"]{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    width: 97.4%;
+    color: #fff;
+    font-size: 20px;
+    background-color: rgb(0, 0, 0);
+}
+/* ___Score Quiz______________________ */
+.header{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+.header_Quiz{
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #000000;
+}
+option,select{
+    width: 50%;
+}
+/* _______Button Submit_________________________ */
+.btn-submit{
+    width: 10%;
+    font-size: 20px;
+    margin-left: 70%;
+    padding: 1%;
+    margin-bottom: 5%;
+}
+.active{
+    border-bottom: #000000 solid 5px;
+}

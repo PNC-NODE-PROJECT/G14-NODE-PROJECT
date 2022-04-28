@@ -1,0 +1,57 @@
+[
+    {
+        "id":1,
+        "questionTitle":"When we use Present Simple?",
+        "answers":{
+            "a":"To describe about everything in the past",
+            "b":"To describe about everything will happend in the future",
+            "c":"To describe about everything in fact or habit",
+            "d":"To describe about everything is happenning at the moment"
+        },
+        "correctAnswer":"To describe about everything in fact or habit"
+    },
+    {
+        "id":2,
+        "questionTitle":"What is the form of Present Simple?",
+        "answers":{
+            "a":"S+V1+Obj",
+            "b":"S+V2+Obj",
+            "c":"S+V3+Obj",
+            "d":"S-v1+Obj"
+        },
+        "correctAnswer":"S+V1+Obj"
+    },
+    {
+        "id":3,
+        "questionTitle":"Which one is Present Simple?",
+        "answers":{
+            "a":"I went to market last night",
+            "b":"I goes to market tomorrow",
+            "c":"I go to market with my mum",
+            "d":"I do not go market with my dad"
+        },
+        "correctAnswer":"I go to market with my mum"
+    },
+    {
+        "id":4,
+        "questionTitle":"Which one is not Present Simple?",
+        "answers":{
+            "a":"She likes reading books so much",
+            "b":"What is she doing?",
+            "c":"Does she read books?",
+            "d":"She loves history books"
+        },
+        "correctAnswer":"What is she doing?"
+    },
+    {
+        "id":5,
+        "questionTitle":"Which one is correct?",
+        "answers":{
+            "a":"They do not likes to visit that place",
+            "b":"She does not loves to visit that place last night",
+            "c":"I does not watch the movie",
+            "d":"we always ask teacher about the difficult points"
+        },
+        "correctAnswer":"we always ask teacher about the difficult points"
+    }
+]
