@@ -45,7 +45,7 @@ let arrAnswer = [
 ]
 // _____________________Functions__________________
 // Display the list of question on the DOM
-// @param questions - the list of  questions
+// @param questions - the list of questions
 //
 function displayQuestions(questions) {
     let getContainer=document.querySelectorAll('.container');
@@ -165,7 +165,6 @@ function showAndHide(event){
 
 //===============================================================
 
-
     if (event.target.textContent === "Edit Quiz"){
         let containers=document.querySelector('.container');
         if (containers != null){
@@ -182,9 +181,9 @@ function showAndHide(event){
         show_Quiz.style.borderBottom = "none";
     }
 }
-function startQuiz(event){
-    event.preventDefault();
-}
+// function startQuiz(event){
+//     event.preventDefault();
+// }
 function hideQuetionAndgQuiz(event){
     event.preventDefault();
     var containers=document.querySelector('.container');
@@ -204,7 +203,6 @@ function addDataTolist(event){
     let answerAdd2=document.querySelector('#answer2').value;
     let answerAdd3=document.querySelector('#answer3').value;
     let answerAdd4=document.querySelector('#answer4').value;
-    //let listCorect=document.querySelector('#corectAnswer');
     // create opption____________________________________________________
 
     let opption1=document.querySelector('#option1');
@@ -257,7 +255,6 @@ function submitScore(){
     buttonSubmit.style.display = "none";
 }
 // _______________________Increment score_______________________________
-
 function showScores(){
     let score = document.querySelector(".score");
     
@@ -288,12 +285,10 @@ function showScores(){
     }
 
 }
-
 // _________________________savedata______________________________
 function saveData(){
     localStorage.setItem("arrAnswer" ,JSON.stringify(arrAnswer))
 }
-
 // _______________________________Button Submit_______________________
 let btnSubmit = document.createElement('button');
 btnSubmit.classList.add('btn-submit');
@@ -318,7 +313,6 @@ let inputUsersName = document.querySelector(".userName");
 let showScore = document.querySelector(".header");
 let buttonSubmit = document.querySelector(".btn-submit");
 let buttonCancle = document.querySelector("#cancel");
-
 // _____________________Main___________________
 formAdd.style.display='none';
 inputUsersName.style.display='none';
