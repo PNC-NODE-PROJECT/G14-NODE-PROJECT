@@ -55,7 +55,7 @@ function add(){
     })
 }    
 
-
+//_______________Show and hide __________________________________
 function showAndHide(event){
     if(event.target.textContent ==="Play quiz"){
         let oldContainer = document.getElementsByClassName("containersQuiz");
@@ -113,37 +113,6 @@ function btnCancle(event){
 }
 
 
-// // _______________________Increment score_______________________________
-// function showScores(){
-//     let score = document.querySelector(".score");
-    
-//     let label = document.querySelectorAll('input[type="radio"]');
-//     correctAns = "";
-//     noTrue = true;
-//     let result = 0;
-//     for(let value of label){
-//         if(value.checked){
-//             isOnetrue= false;
-//             for(let answer of arrAnswer){
-//                 if(value.nextElementSibling.textContent === answer.correctAnswers && isOnetrue===false){
-//                     result += 1;
-//                     value.nextElementSibling.style.color ="green";
-//                     score.textContent = result;
-//                     noTrue=false;
-//                     isOnetrue= true;
-//                 }
-//                 else if (isOnetrue===false){
-//                     value.nextElementSibling.style.color ="red";
-//                 }
-//             }  
-//         }
-        
-//     }
-//     if(noTrue){
-//         score.textContent=result;
-//     }
-
-// }
 // _________________________savedata______________________________
 function saveData(){
     localStorage.setItem("arrAnswer" ,JSON.stringify(arrAnswer))
