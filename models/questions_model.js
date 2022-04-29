@@ -26,15 +26,13 @@ let path = './data/questions_data.json'
 let addQuestion = (question) => {
     let status = false;
     let questions = readFile(path);
-    let questionTitle = question.questionTitle;
-    let answer = question.answers;
-    let correctAnswer = question.correctAnswer;
-    if (questionTitle !== undefined && answer !== undefined && correctAnswer !== undefined) {
+    console.log(question);
+    if (question.questionTitle !== "" && question.correctAnswer !== "") {
         let newQuestion = {
             "id": uuidv4(),
-            "questionTitle": questionTitle,
-            "answerTitle": answer,
-            "correctAnswer": correctAnswer
+            "questionTitle": question.questionTitle,
+            "answers": question.answers,
+            "correctAnswer": question.correctAnswer
         }
         questions.push(newQuestion);
         writeFile(path, questions);
@@ -43,7 +41,6 @@ let addQuestion = (question) => {
     return status
 
 }
-
 /**
  * @param {*} id
  * @returns 
@@ -64,7 +61,7 @@ let removeQuestion = (id) => {
  * @param {*} id
  * @returns 
  */
- let updateQuestion = (question, id) => {
+let updateQuestion = (question, id) => {
     let questions = readFile(path)
     let index = questions.findIndex(question => question.id === id)
     let status = false
@@ -79,7 +76,7 @@ let removeQuestion = (id) => {
         if (question.correctAnswer !== undefined) {
             newQuestion.correctAnswer = question.correctAnswer
         }
-        
+
         status = true
     }
     writeFile(path, questions)

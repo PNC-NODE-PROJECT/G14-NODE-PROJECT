@@ -9,7 +9,7 @@ const questionModel = require('../models/questions_model')
  * 
  */
 router.get("/", (req, res) => {
-    let questions = questionModel.getQuestion(); 
+    let questions = questionModel.getQuestion();
     res.send(questions);
 })
 
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
  * @param req: the request objects
  * @param res: the response to the message that it success or filed required
  */
-router.post("/", (req, res) => {
+router.post("/create", (req, res) => {
     let isAddQuestion = questionModel.addQuestion(req.body)
     if (isAddQuestion) {
         res.status(201).send({
@@ -56,16 +56,16 @@ router.delete("/:id", (req, res) => {
  * @param req: request the id of the object
  * @param res: response to the message it success or question id not found
  */
- router.patch("/:id", (req, res) => {
+router.patch("/:id", (req, res) => {
     let id = req.params.id
-    let isUpdateQuestion = questionModel.updateQuestion(req.body,id)
+    let isUpdateQuestion = questionModel.updateQuestion(req.body, id)
     if (isUpdateQuestion) {
         res.status(200).send({
-            "message": 'Item updated successfully'
+            "message": 'Question updated successfully'
         })
     } else {
         res.status(404).send({
-            "message": 'Item id not found'
+            "message": 'Question id not found'
         })
     }
 })
