@@ -5,20 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App </title>
-    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+    
 </head>
-<body>
+<body id="getBody">
     <nav>
         <ul>
             <img src="images/pnc.png" alt="">
         </ul>
         <ul id="menu">
             <li class="active" id="create_question"><a href="index.html">Edit Quiz</a></li>
-            <li id="play_quiz"><a href="">Play quiz</a></li>
+            <li id="play_quiz"><a href="" onclick="getQuestionToplay()">Play quiz</a></li>
         </ul>
     </nav>
     <button id="btnAdd">Add Question</button>
@@ -59,12 +59,16 @@
         <h2>Your Name </h2>
         <input type="text" name="name" placeholder="Fill your name"> 
     </div>
+
     <div class="header">
         <div class="header_Quiz">
             <h3>Your Score: </h1>
             <h3 class="score"> 0</h1>
         </div>
     </div>
+</div>
+<div class="containerQuiz">
+    
 </div>
 </body>
 <script src="js/main.js"></script>
