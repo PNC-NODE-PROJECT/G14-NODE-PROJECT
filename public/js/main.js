@@ -4,6 +4,9 @@
 // @param questions - the list of questions
 //
 
+// global variable with list of questions
+dataOfQuiz = [];
+
 //___________________Display Question_______________________________
 function refreshDomElement(questions) {
     for (let quesion of questions) {
@@ -31,16 +34,14 @@ function refreshDomElement(questions) {
 
         let editDeleteBox = document.createElement('div');
         editDeleteBox.className = "editDeleteBox";
-        let editQuestion = document.createElement('img');
-        editQuestion.style.width = "1.25rem";
-        editQuestion.className = "editQuestion";
-        editQuestion.src = "images/edit.png";
+        // Edit Button
+        let editQuestion = document.createElement('i');
+        editQuestion.className = "fa fa-edit";
+        editQuestion.id = "edit";
+        editQuestion.addEventListener("click", showEditForm);
         editDeleteBox.appendChild(editQuestion);
-        editQuestion.className = "editQuestion";
-
+        // Delete Button
         let deleteQuestion = document.createElement("i");
-        // deleteQuestion.style.width="1.25rem";
-        // deleteQuestion.src="images/delete.png";
         deleteQuestion.className = "fa fa-trash";
         deleteQuestion.id = "delete";
         deleteQuestion.addEventListener("click", deleteQ);
@@ -52,50 +53,20 @@ function refreshDomElement(questions) {
     }
 }
 
+const hide = (element) => {
+    element.style.display = "none";
+}
+const show = (element) => {
+    element.style.display = "block";
+}
+
+
 function displayQuestions() {
-    axios.get("http://localhost:80/api/questions").then((response) => {
-        let dataOfQuiz = response.data;
+    axios.get("/api/questions").then((response) => {
+        dataOfQuiz = response.data;
         refreshDomElement(dataOfQuiz);
     });
 };
-
-//_____________________Add the question_________________________________
-function add() {
-    let url = "http://localhost:80/api/questions/create";
-    let question = questionAdd.value;
-    let answer1 = answerAdd1.value;
-    let answer2 = answerAdd2.value;
-    let answer3 = answerAdd3.value;
-    let answer4 = answerAdd4.value;
-    let corrected = correctAn.value;
-    let body = {
-        questionTitle: question,
-        answers: {
-            a: answer1,
-            b: answer2,
-            c: answer3,
-            d: answer4
-        },
-        correctAnswer: corrected
-    }
-    axios.post(url, body)
-        .then((result) => {
-            console.log(body);
-        })
-}
-//______________Delete the question_____________
-function deleteQ(event) {
-    event.preventDefault();
-    if (event.target.id === "delete") {
-        // console.log(event.target.parentElement.parentElement.id);
-        let id = event.target.parentElement.parentElement.id;
-        let url = "http://localhost:80/api/questions/delete/" + id;
-        axios.delete(url)
-            .then((results) => {
-                console.log(results);
-            })
-    }
-}
 
 //_____________Play quiz_______________________
 
@@ -126,7 +97,6 @@ function playQuiz(questions) {
             li.appendChild(label)
         }
     }
-    
 }
 
 function getQuestionToplay() {
@@ -138,40 +108,86 @@ function getQuestionToplay() {
         })
 }
 
-//__________________________Show score___________________________
-// function showScore(){
-//     let score = document.querySelector(".score");
-//     let label = document.querySelectorAll('input[type="radio"]');
-//     console.log(label);
-// }
-
-
-
-
-// function getScores(){
-//     let url = "http://localhost:80/api/questions";
-//     axios.get(url)
-//     .then((respone)=>{
-//         let data = respone.data;
-//         showScore();
-//     })
-// }
-
+//_____________________Add the question_________________________________
+function add() {
+    let url = "/api/questions/create";
+    let question ="Question : "+ questionAdd.value;
+    let answer1 = "A : "+answerAdd1.value;
+    let answer2 = "B : "+answerAdd2.value;
+    let answer3 = "C : "+answerAdd3.value;
+    let answer4 = "D : "+answerAdd4.value;
+    let corrected = correctAn.value;
+    let body = { questionTitle: question, answers: { a: answer1, b: answer2, c: answer3, d: answer4 }, correctAnswer: corrected }
+    axios.post(url, body)
+        .then((result) => {
+            console.log(body);
+        })
+}
+//______________Delete the question_____________
+function deleteQ(event) {
+    if (event.target.id === "delete") {
+        let id = event.target.parentElement.parentElement.id;
+        let url = "/api/questions/delete/" + id;
+        axios.delete(url)
+            .then((results) => {
+                console.log(results);
+            })
+    }
+}
+// _____________Edit the question____________
+btnEdit = document.querySelector('.btn-edit');
+hide(btnEdit)
+function editQ(id) {
+    let URL = "/api/questions/edit/" + id;
+    for (let datas of dataOfQuiz) {
+        question = questionAdd.value;
+        answer1 = answerAdd1.value;
+        answer2 = answerAdd2.value;
+        answer3 = answerAdd3.value;
+        answer4 = answerAdd4.value;
+        corrected =correctAn.value;
+    }
+    let body = {questionTitle: question,
+        answers:{a: answer1,b:answer2,c:answer3,d:answer4},
+        correctAnswer: corrected}
+    axios.patch(URL, body).then((result) => {
+        console.log(result);
+    })
+}
+function showEditForm(event) {
+    if (event.target.id === "edit") {
+        let id = event.target.parentElement.parentElement.id;
+        for (let datas of dataOfQuiz) {
+            let theId = datas.id;
+            if (theId === id) {
+                show(formAdd);
+                hide(addList);
+                hide(getContainer)
+                show(btnEdit)
+                questionAdd.value = datas.questionTitle;
+                answerAdd1.value = datas.answers.a;
+                answerAdd2.value = datas.answers.b;
+                answerAdd3.value = datas.answers.c;
+                answerAdd4.value = datas.answers.d;
+                correctAn.value = datas.correctAnswer;
+            }
+        }
+        btnEdit.addEventListener('click', (event) => {
+            editQ(id);
+        });
+    }
+}
 //_______________Show and hide __________________________________
 function showAndHide(event) {
-
     if (event.target.textContent === "Edit Quiz") {
-        let getContainer = document.querySelector('#container');
         if (getContainer != null) {
             getContainer.style.display = 'none';
         }
         addBtn.style.display = "block";
         formAdd.style.display = 'none';
-        playQuiz(questions);
         let usersPlay = document.querySelector(".userName");
         usersPlay.style.display = "none";
         buttonSubmit.style.display = "none";
-
         showScore.style.display = "none";
         hide_Quiz.style.borderBottom = "5px solid";
         hide_Quiz.style.borderBottomColor = "#0E578C";
@@ -191,10 +207,8 @@ function showAndHide(event) {
         show_Quiz.style.borderBottom = "5px solid";
         show_Quiz.style.borderBottomColor = "#0E578C";
         hide_Quiz.style.borderBottom = "none";
-
     }
 }
-
 function hideQuetionAndgQuiz(event) {
     event.preventDefault();
     var containers = document.querySelector('#container');
@@ -206,7 +220,6 @@ function hideQuetionAndgQuiz(event) {
     var message = document.querySelector('.alert');
     message.style.display = 'none';
 }
-
 function btnCancle(event) {
     event.preventDefault();
     getContainer.style.display = "block";
@@ -216,8 +229,15 @@ let btnSubmit = document.createElement('button');
 btnSubmit.classList.add('btn-submit');
 btnSubmit.textContent = "Submit";
 document.body.appendChild(btnSubmit);
-
-// ________________________Variable_______________________________
+// _______________________Increment score_______________________________
+let results = 0;
+let scores = document.querySelector(".score");
+function increment_Score(event) {
+    event.preventDefault();
+    let allAnswers = document.getElementsByTagName("lable");
+    console.log(allAnswers);
+}
+// ________________________Variable________________________
 let startQuiz = document.querySelector("#startQuiz");
 let hide_Quiz = document.getElementById("create_question");
 let show_Quiz = document.getElementById("play_quiz");
@@ -228,11 +248,10 @@ let inputUsersName = document.querySelector(".userName");
 let showScore = document.querySelector(".header");
 let buttonSubmit = document.querySelector(".btn-submit");
 let buttonCancle = document.querySelector("#cancel");
-// _____________________Style_____________________________________________________
+// _____________________Style_______________________________
 formAdd.style.display = 'none';
 inputUsersName.style.display = 'none';
 buttonSubmit.style.display = 'none';
-
 
 // _____________________Show and Hide Quiz________________________________________
 document.addEventListener("click", showAndHide);
@@ -244,6 +263,7 @@ buttonCancle.addEventListener("clcik", btnCancle);
 //________________________MAIN______________________________________________
 let getContainer = document.querySelector('#container');
 let questionAdd = document.querySelector('#questiontext');
+let answerContainer = document.querySelector("#answer-container");
 let answerAdd1 = document.querySelector('#answer1');
 let answerAdd2 = document.querySelector('#answer2');
 let answerAdd3 = document.querySelector('#answer3');

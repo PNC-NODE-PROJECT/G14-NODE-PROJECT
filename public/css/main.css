@@ -1,93 +1,126 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
 }
+
 /* __Menu__ */
-nav{
+nav {
+    background-color: rgb(192, 225, 255);
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
 }
-ul img{
+
+ul img {
     margin-left: 30px;
 }
-img{
+
+img {
     width: 140px;
 }
-ul{
+
+ul {
     display: flex;
     margin-top: 1%;
     margin-right: 3%;
     margin-bottom: 1%;
 
 }
-ul li{
+
+ul li {
     list-style: none;
     padding: 5px 10px;
     margin-left: 5px;
     cursor: pointer;
 }
-ul li a{
+
+ul li a {
     text-decoration: none;
-    color: rgb(0, 0, 0);   
+    color: rgb(0, 0, 0);
 }
+
 ul li:hover {
     transition: 0.9s ease;
     border-radius: 5px;
-    background-color: #000000;
+    background-color: rgb(0, 186, 37);
     border: none;
 }
-ul li a:hover{
+
+ul li a:hover {
     color: white;
 }
-ul h2{
+
+ul h2 {
     margin-top: 5px;
 }
+
 /* _____Display Questions_____________________________ */
-.question-container{
+.question-container {
     width: 85%;
     padding: 2.5%;
 }
-.cardTitle{
+
+.cardTitle {
     padding-top: 2%;
     padding-bottom: 2%;
 }
-.cardTitle,.question-container p{
-    background-color: #000000;
-    color: #fff;
+
+.cardTitle,
+.question-container p {
+    color: rgb(0, 0, 0);
+    background-color: rgb(192, 225, 255);
     padding-left: 10%;
     margin-top: 5%;
+    border: 1px solid rgb(70, 98, 255);
+
 }
-.question-container p{
+
+.cardTitle {
+    border-left: 10px solid rgb(70, 98, 255);
+}
+
+.question-container p {
     margin-left: 15%;
     width: 65%;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
 
 }
-.cardBox{
-    border: 3px solid black;
+
+.cardBox {
+    border: 1.5px solid rgb(70, 98, 255);
     width: 50%;
     margin: auto;
+    margin-top: 5%;
     margin-bottom: 5%;
     border-radius: 3vh;
     display: flex;
+    border-top: 5px solid rgb(70, 98, 255);
+    border-top-left-radius: 3vh;
+    border-top-right-radius: 3vh;
 }
-.editDeleteBox{
-    margin-top: 6%;
+
+.editDeleteBox {
+    margin-top: 1%;
     width: 15%;
+    margin-right: -5%;
 }
-.editQuestion{
-    margin-left: 5%;
+
+.editDeleteBox #edit {
+    margin-bottom: -5%;
+    color: green;
 }
-.deleteQuestion{
-    margin-left: 15%;
-} 
+
+.editDeleteBox #delete {
+    margin-left: 10%;
+    color: rgb(210, 0, 0);
+}
+
 /* ____Add Question_____________________________ */
-#btnAdd{
+#btnAdd {
     margin-left: 70%;
     margin-top: 20px;
     padding: 10px;
@@ -96,38 +129,75 @@ ul h2{
     border: none;
     border-radius: 5px;
     color: #fff;
-    background-color: #000000;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: rgb(70, 98, 255);
+    border-radius: 3vh;
+    box-shadow: rgba(151, 236, 255, 0.35) 0px 5px 15px;
 }
-#cancel,.addlist{
+
+#btnAdd:hover {
+    background-color: rgb(0, 186, 37);
+    color: #000000;
+}
+
+#cancel,
+.addlist,
+.btn-edit {
     width: 18%;
     height: 5vh;
     border-radius: 5px;
     border: none;
-    background-color: #000000;
     color: white;
     font-size: 15px;
 }
-.iconDelete{
-    margin-right: -3px;
-    margin-top: -2px;
-    font-size: 1.5rem;
+
+.addlist,
+.btn-edit {
+    background-color: rgb(70, 98, 255);
 }
-.iconEdit{
-    color: white;
-    font-size: 1.5rem;
+
+.addlist:hover {
+    background-color: rgb(0, 186, 37);
+    color: #000000;
 }
+
+#cancel {
+    background-color: gray;
+    margin-top: 1.9%;
+    margin-left: 5%;
+}
+
+#cancel:hover {
+    background-color: #565656;
+}
+
+/*  Group of buttons  */
+.group-btn {
+    display: flex;
+}
+
+.btn-edit {
+    margin-top: 2%;
+}
+
+.btn-edit:hover {
+    background-color: rgb(0, 186, 37);
+
+}
+
 /* ----form add question------------------------ */
-.formToAdd{
+.formToAdd {
     width: 60%;
     height: auto;
     margin: auto;
     border-radius: 10px;
     padding: 20px;
     margin-top: 30px;
-    border: 3px solid black;
+    border: 1px solid rgb(70, 98, 255);
+    border-top: 5px solid rgb(70, 98, 255);
+    margin-bottom: 5%;
 }
-.formToAdd input[type='text']{
+
+.formToAdd input[type='text'] {
     padding: 10px;
     margin: 10px;
     width: 94%;
@@ -135,23 +205,37 @@ ul h2{
     font-size: large;
     color: white;
 }
-.formToAdd p{
+
+.formToAdd p {
     font-size: 1rem;
     margin-left: 20px;
 }
-.mycontainer{
+
+.mycontainer {
     width: 100%;
     height: auto;
 }
-label{
+
+#label-question {
     display: flex;
     justify-content: space-between;
     border-radius: 5px;
     width: 100%;
     color: #000000;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
-.containersQuiz ol{
+
+.label-answer {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    width: 100%;
+    color: #000000;
+    margin-left: 8%;
+    font-size: 1.3rem;
+}
+
+.containersQuiz ol {
     width: 90%;
     border-radius: 10px;
     background-color: white;
@@ -162,42 +246,61 @@ label{
     margin-top: 10px;
     padding: 10px;
 }
-.addlist , .btn-submit{
+
+.addlist,
+.btn-submit {
     border-radius: 5px;
     border: none;
-    background-color: #000000;
     margin-top: 15px;
     margin-left: 60%;
     cursor: pointer;
     color: #fff;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 
-}
-#questiontext,#answer1,#answer2,#answer3,#answer4{
-    background-color: #000000;
-    color: #fff;
+#questiontext,
+#answer1,
+#answer2,
+#answer3,
+#answer4 {
+    background-color: rgb(192, 225, 255);
+    color: rgb(0, 0, 0);
     height: 1vh;
+    border: 1.5px solid rgb(70, 98, 255);
 }
-#corectAnswer{
-    background-color: #000000;
-    color: white;
+
+#questiontext {
+    border-left: 10px solid rgb(70, 98, 255);
+}
+
+៊#hidden,
+#answer1,
+#answer2,
+#answer3,
+#answer4 {
+    margin-left: 8%;
+    width: 80%;
+}
+
+#corectAnswer {
+    background-color: rgb(192, 225, 255);
+    color: rgb(0, 0, 0);
     width: 30%;
     height: 4vh;
-    border-radius: 5px;
-    border: none;
     font-size: 15px;
-    margin-left: 1.5%;
 }
+
 /* ___Play Quiz username____________________________________ */
-.userName{
+.userName {
     width: 64%;
     height: 300%;
-    border: 1px solid ;
+    border: 1px solid;
     border: none;
     margin: auto;
     margin-top: 20px;
 }
-.title{
+
+.title {
     width: 94%;
     margin: auto;
     height: 15vh;
@@ -205,15 +308,17 @@ label{
     color: #fff;
     margin-bottom: 5%;
 }
-.title h2{
+
+.title h2 {
     height: 5vh;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background-color: #000000 ;
+    background-color: #000000;
     padding: 10px;
     margin-bottom: 1px;
 }
-.title input[type="text"]{
+
+.title input[type="text"] {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     padding: 10px;
@@ -224,15 +329,17 @@ label{
     font-size: 20px;
     background-color: rgb(0, 0, 0);
 }
+
 /* ___Score Quiz______________________ */
-.header{
+.header {
     width: 100%;
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: #fff;
 }
-.header_Quiz{
+
+.header_Quiz {
     height: 6vh;
     display: flex;
     justify-content: center;
@@ -240,17 +347,21 @@ label{
     border-radius: 5px;
     background-color: #000000;
 }
-option,select{
+
+option,
+select {
     width: 50%;
 }
+
 /* _______Button Submit_________________________ */
-.btn-submit{
+.btn-submit {
     width: 10%;
     font-size: 20px;
     margin-left: 70%;
     padding: 1%;
     margin-bottom: 5%;
 }
-.active{
-    border-bottom: #000000 solid 5px;
+
+.active {
+    border-bottom: rgb(70, 98, 255) solid 5px;
 }
