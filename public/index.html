@@ -10,15 +10,16 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+    
 </head>
-<body>
+<body id="getBody">
     <nav>
         <ul>
             <img src="images/pnc.png" alt="">
         </ul>
         <ul id="menu">
             <li class="active" id="create_question"><a href="index.html">Edit Quiz</a></li>
-            <li id="play_quiz"><a href="">Play quiz</a></li>
+            <li id="play_quiz"><a href="" onclick="getQuestionToplay()">Play quiz</a></li>
         </ul>
     </nav>
     <button id="btnAdd">Add Question</button>

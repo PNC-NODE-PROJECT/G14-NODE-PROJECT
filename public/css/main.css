@@ -47,47 +47,45 @@ ul h2{
     margin-top: 5px;
 }
 /* _____Display Questions_____________________________ */
-ol{
-    width: 60%;
-    border: 3px solid black ;
-    border-radius: 10px;
-    list-style: none;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 50px;
-    padding: 10px;
+.question-container{
+    width: 85%;
+    padding: 2.5%;
+}
+.cardTitle{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.cardTitle,.question-container p{
+    background-color: #000000;
+    color: #fff;
+    padding-left: 10%;
+    margin-top: 5%;
+}
+.question-container p{
+    margin-left: 15%;
+    width: 65%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
 
 }
-ol li{
-    margin-left: 10%;
-    padding: 5px;
+.cardBox{
+    border: 3px solid black;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 5%;
+    border-radius: 3vh;
     display: flex;
-    width: 80%;
-    justify-content: center;
-    margin-bottom: 30px;
-    background-color: #000000;
 }
-ol li label{
-    color: rgb(255, 255, 255);
-    font-size: 10px;
+.editDeleteBox{
+    margin-top: 6%;
+    width: 15%;
 }
-.questionTitle{
-    margin-top: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    color: white;
-    background-color: #000000;
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 40px;
+.editQuestion{
+    margin-left: 5%;
 }
-ol li label {
-    display: flex;
-    font-size: 22px;
-}
+.deleteQuestion{
+    margin-left: 15%;
+} 
 /* ____Add Question_____________________________ */
 #btnAdd{
     margin-left: 70%;
