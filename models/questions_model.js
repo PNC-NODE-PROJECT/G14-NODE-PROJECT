@@ -56,7 +56,6 @@ let removeQuestion = (id) => {
     writeFile(path, questions)
     return status
 }
-
 /**
  * @param {*} id
  * @returns 
@@ -82,10 +81,6 @@ let updateQuestion = (question, id) => {
     writeFile(path, questions)
     return status
 }
-
-
-
-
 /**
  * 
  * @returns 

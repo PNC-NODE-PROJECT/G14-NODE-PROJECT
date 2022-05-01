@@ -30,13 +30,12 @@ router.post("/create", (req, res) => {
         })
     }
 })
-
 /**
  * delete the question from the data
  * @param req: request id in the object
  * @param res: respone the message success or id not found
  */
-router.delete("/:id", (req, res) => {
+router.delete("/delete/:id", (req, res) => {
     let id = req.params.id
     let isDeleteQuestion = questionModel.removeQuestion(id)
 
@@ -50,13 +49,12 @@ router.delete("/:id", (req, res) => {
         })
     }
 })
-
 /**
  * Update the question in the  object store
  * @param req: request the id of the object
  * @param res: response to the message it success or question id not found
  */
-router.patch("/:id", (req, res) => {
+router.patch("/edit/:id", (req, res) => {
     let id = req.params.id
     let isUpdateQuestion = questionModel.updateQuestion(req.body, id)
     if (isUpdateQuestion) {
