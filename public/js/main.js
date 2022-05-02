@@ -4,6 +4,9 @@
 // @param questions - the list of questions
 //
 
+// global variable with list of questions
+dataOfQuiz = [];
+
 //___________________Display Question_______________________________
 function refreshDomElement(questions) {
     for (let quesion of questions) {
@@ -31,16 +34,14 @@ function refreshDomElement(questions) {
 
         let editDeleteBox = document.createElement('div');
         editDeleteBox.className = "editDeleteBox";
-        let editQuestion = document.createElement('img');
-        editQuestion.style.width = "1.25rem";
-        editQuestion.className = "editQuestion";
-        editQuestion.src = "images/edit.png";
+        // Edit Button
+        let editQuestion = document.createElement('i');
+        editQuestion.className = "fa fa-edit";
+        editQuestion.id = "edit";
+        editQuestion.addEventListener("click", showEditForm);
         editDeleteBox.appendChild(editQuestion);
-        editQuestion.className = "editQuestion";
-
+        // Delete Button
         let deleteQuestion = document.createElement("i");
-        // deleteQuestion.style.width="1.25rem";
-        // deleteQuestion.src="images/delete.png";
         deleteQuestion.className = "fa fa-trash";
         deleteQuestion.id = "delete";
         deleteQuestion.addEventListener("click", deleteQ);
@@ -52,78 +53,42 @@ function refreshDomElement(questions) {
     }
 }
 
+let hide = (element) => {
+    element.style.display = "none";
+}
+let show = (element) => {
+    element.style.display = "block";
+}
+
+
 function displayQuestions() {
-    axios.get("http://localhost:80/api/questions").then((response) => {
-        let dataOfQuiz = response.data;
+    axios.get("/api/questions").then((response) => {
+        dataOfQuiz = response.data;
         refreshDomElement(dataOfQuiz);
     });
 };
 
-//_____________________Add the question_________________________________
-function add() {
-    let url = "http://localhost:80/api/questions/create";
-    let question = questionAdd.value;
-    let answer1 = answerAdd1.value;
-    let answer2 = answerAdd2.value;
-    let answer3 = answerAdd3.value;
-    let answer4 = answerAdd4.value;
-    let corrected = correctAn.value;
-    let body = {
-        questionTitle: question,
-        answers: {
-            a: answer1,
-            b: answer2,
-            c: answer3,
-            d: answer4
-        },
-        correctAnswer: corrected
-    }
-    axios.post(url, body)
-        .then((result) => {
-            console.log(body);
-        })
-}
-//______________Delete the question_____________
-function deleteQ(event) {
-    event.preventDefault();
-    if (event.target.id === "delete") {
-        // console.log(event.target.parentElement.parentElement.id);
-        let id = event.target.parentElement.parentElement.id;
-        let url = "http://localhost:80/api/questions/delete/" + id;
-        axios.delete(url)
-            .then((results) => {
-                console.log(results);
-            })
-    }
-}
-
 //_____________Play quiz_______________________
 
 function playQuiz(questions) { 
-    // inputUsersName.appendChild(containersQuiz);
-
-    while(containersQuiz.firstChild){
-        containersQuiz.removeChild(containersQuiz.lastChild);
-    }
+    let containersQuiz = document.createElement("div");
+    containersQuiz.className = "containersQuiz";
+    inputUsersName.appendChild(containersQuiz);
 
     for (let question of questions) {
-        let cardAns = document.createElement("div");
-        cardAns.className = "cardAns";
-        containersQuiz.appendChild(cardAns);
         let domQuestion = document.createElement("h3");
         domQuestion.innerHTML = question.questionTitle;
-        cardAns.appendChild(domQuestion);
+        containersQuiz.appendChild(domQuestion);
 
         let domAnswers = question.answers;
         console.log(domAnswers);
         for (let answer in domAnswers) {
             let ol = document.createElement("ol");
-            cardAns.appendChild(ol);
+            containersQuiz.appendChild(ol);
             let li = document.createElement("li");
             ol.appendChild(li);
             let radio = document.createElement("input");
             radio.setAttribute("type", "radio");
-            // radio.setAttribute("name", "ans");
             radio.setAttribute("name", question.id);
             radio.setAttribute("value", answer);
             li.appendChild(radio);
@@ -132,31 +97,97 @@ function playQuiz(questions) {
             li.appendChild(label)
         }
     }
-    
 }
 
 function getQuestionToplay() {
     let url = "http://localhost:80/api/questions";
     axios.get(url)
-    .then((response) => {
-        let data = response.data;
-        console.log(data);
-        playQuiz(data);
-        
+        .then((response) => {
+            let data = response.data;
+            playQuiz(data);
+        })
+}
+
+//_____________________Add the question_________________________________
+function add() {
+    let url = "/api/questions/create";
+    let question ="Question : "+ questionAdd.value;
+    let answer1 = "A : "+answerAdd1.value;
+    let answer2 = "B : "+answerAdd2.value;
+    let answer3 = "C : "+answerAdd3.value;
+    let answer4 = "D : "+answerAdd4.value;
+    let corrected = correctAn.value;
+    let body = { questionTitle: question, answers: { a: answer1, b: answer2, c: answer3, d: answer4 }, correctAnswer: corrected }
+    axios.post(url, body)
+        .then((result) => {
+            console.log(body);
+        })
+}
+//______________Delete the question_____________
+function deleteQ(event) {
+    if (event.target.id === "delete") {
+        let id = event.target.parentElement.parentElement.id;
+        let url = "/api/questions/delete/" + id;
+        axios.delete(url)
+            .then((results) => {
+                console.log(results);
+            })
+    }
+}
+// _____________Edit the question____________
+btnEdit = document.querySelector('.btn-edit');
+hide(btnEdit)
+function editQ(id) {
+    let URL = "/api/questions/edit/" + id;
+    for (let datas of dataOfQuiz) {
+        question = questionAdd.value;
+        answer1 = answerAdd1.value;
+        answer2 = answerAdd2.value;
+        answer3 = answerAdd3.value;
+        answer4 = answerAdd4.value;
+        corrected =correctAn.value;
+    }
+    let body = {questionTitle: question,
+        answers:{a: answer1,b:answer2,c:answer3,d:answer4},
+        correctAnswer: corrected}
+    axios.patch(URL, body).then((result) => {
+        console.log(result);
     })
 }
+function showEditForm(event) {
+    if (event.target.id === "edit") {
+        let id = event.target.parentElement.parentElement.id;
+        for (let datas of dataOfQuiz) {
+            let theId = datas.id;
+            if (theId === id) {
+                show(formAdd);
+                hide(addList);
+                hide(getContainer)
+                show(btnEdit)
+                questionAdd.value = datas.questionTitle;
+                answerAdd1.value = datas.answers.a;
+                answerAdd2.value = datas.answers.b;
+                answerAdd3.value = datas.answers.c;
+                answerAdd4.value = datas.answers.d;
+                correctAn.value = datas.correctAnswer;
+            }
+        }
+        btnEdit.addEventListener('click', (event) => {
+            editQ(id);
+        });
+    }
+}
+
+
+//___________________Show score__________________________________
 let scoreusers = 0
 function computeScore(answers){
     let url = "http://localhost:80/api/questions";
     axios.get(url)
     .then((response) => {
         let array_questions = response.data;
-        // console.log(data);
-        // computeScore(data);
         let score = document.querySelector(".score");
         let labels = document.querySelectorAll('input[type="radio"]');
-        // let domAnswers = data.answers;
-        // console.log(label);
         let userChoice = 0;
         let array_user_ans = []
         for(let i = 0; i<labels.length; i++) {
@@ -170,6 +201,7 @@ function computeScore(answers){
             for(let k = 0;k<array_questions.length;k++){
                 if (array_questions[k].correctAnswer === array_user_ans[k]){
                     scoreusers ++;
+                    score.textContent = scoreusers;
                 }
             }
             
@@ -178,67 +210,18 @@ function computeScore(answers){
             array_user_ans = [];
         }
         console.log(scoreusers);
-        // array_questions.forEach(array => {
-        //     console.log(array.correctAnswer);
-        // });
     })
-
-    // for (let answer in answers) {
-    //     console.log(answer.correctAnswer);
-    // }
-    // correctAnswers = "";
-    // noTrue = true;
-    // let result = 0;
-    // for(let value of label){
-    //     if(value.checked){
-    //         isOnetrue= false;
-    //         for(let answer in answers){
-    //             if(value.nextElementSibling.textContent === answer.correctAnswers && isOnetrue===false){
-    //                 result += 1;
-    //                 value.nextElementSibling.style.color ="green";
-    //                 score.textContent = result;
-    //                 noTrue=false;
-    //                 isOnetrue= true;
-    //             }
-    //             else if (isOnetrue===false){
-    //                 value.nextElementSibling.style.color ="red";
-    //             }
-    //         }  
-    //     }
-        
-    // }
-    // if(noTrue){
-    //     score.textContent=result;
-    // }
 }
-
-// function score(){
-//     let url = "http://localhost:80/api/questions";
-//     axios.get(url)
-//     .then((response) => {
-//         let data = response.data;
-//         // console.log(data);
-//         computeScore(data);
-//     })
-// }
-// score();
-
 //_______________Show and hide __________________________________
 function showAndHide(event) {
-
     if (event.target.textContent === "Edit Quiz") {
-        let getContainer = document.querySelector('#container');
         if (getContainer != null) {
             getContainer.style.display = 'none';
         }
         addBtn.style.display = "block";
         formAdd.style.display = 'none';
-        playQuiz(questions);
-        let usersPlay = document.querySelector(".userName");
-        usersPlay.style.display = "none";
         buttonSubmit.style.display = "none";
-
-        showScore.style.display = "none";
+        
         hide_Quiz.style.borderBottom = "5px solid";
         hide_Quiz.style.borderBottomColor = "#0E578C";
         show_Quiz.style.borderBottom = "none";
@@ -253,14 +236,12 @@ function showAndHide(event) {
         formAdd.style.display = 'none';
         inputUsersName.style.display = "block";
         buttonSubmit.style.display = "block";
-        showScore.style.display = "none";
+        showScoreForUser.style.display = "none";
         show_Quiz.style.borderBottom = "5px solid";
         show_Quiz.style.borderBottomColor = "#0E578C";
         hide_Quiz.style.borderBottom = "none";
-
     }
 }
-
 function hideQuetionAndgQuiz(event) {
     event.preventDefault();
     var containers = document.querySelector('#container');
@@ -272,18 +253,26 @@ function hideQuetionAndgQuiz(event) {
     var message = document.querySelector('.alert');
     message.style.display = 'none';
 }
-
 function btnCancle(event) {
     event.preventDefault();
     getContainer.style.display = "block";
 }
-// _______________________________Button Submit_______________________
+// ______________________Button Submit_______________________
 let btnSubmit = document.createElement('button');
 btnSubmit.classList.add('btn-submit');
 btnSubmit.textContent = "Submit";
 document.body.appendChild(btnSubmit);
 
-// ________________________Variable_______________________________
+
+//________________________Submit quiz________________________
+function submitQuiz(){
+    showScoreForUser.style.display = "block";
+    displayUserName.textContent = getUserPlay.value;
+    console.log(displayUserName);
+    buttonSubmit.style.display = "none";
+    inputUsersName.style.display= "none";
+}
+// ________________________Main________________________
 let startQuiz = document.querySelector("#startQuiz");
 let hide_Quiz = document.getElementById("create_question");
 let show_Quiz = document.getElementById("play_quiz");
@@ -291,14 +280,23 @@ let addBtn = document.getElementById("btnAdd");
 let formAdd = document.querySelector('.formToAdd');
 let addList = document.querySelector('.addlist');
 let inputUsersName = document.querySelector(".userName");
-let showScore = document.querySelector(".header");
+let showScoreForUser = document.querySelector(".header");
 let buttonSubmit = document.querySelector(".btn-submit");
+let getUserPlay = document.querySelector('.name');
+let displayUserName = document.querySelector(".getUserName");
 let buttonCancle = document.querySelector("#cancel");
-// _____________________Style_____________________________________________________
+let getContainer = document.querySelector('#container');
+let questionAdd = document.querySelector('#questiontext');
+let answerContainer = document.querySelector("#answer-container");
+let answerAdd1 = document.querySelector('#answer1');
+let answerAdd2 = document.querySelector('#answer2');
+let answerAdd3 = document.querySelector('#answer3');
+let answerAdd4 = document.querySelector('#answer4');
+let correctAn = document.querySelector('#corectAnswer');
+// _____________________Style_______________________________
 formAdd.style.display = 'none';
 inputUsersName.style.display = 'none';
 buttonSubmit.style.display = 'none';
-
 
 // _____________________Show and Hide Quiz________________________________________
 document.addEventListener("click", showAndHide);
@@ -306,15 +304,5 @@ addBtn.addEventListener("click", hideQuetionAndgQuiz);
 addList.addEventListener("click", add);
 buttonCancle.addEventListener("clcik", btnCancle);
 buttonSubmit.addEventListener("click", computeScore);
-
-//________________________MAIN______________________________________________
-let getContainer = document.querySelector('#container');
-let questionAdd = document.querySelector('#questiontext');
-let answerAdd1 = document.querySelector('#answer1');
-let answerAdd2 = document.querySelector('#answer2');
-let answerAdd3 = document.querySelector('#answer3');
-let answerAdd4 = document.querySelector('#answer4');
-let correctAn = document.querySelector('#corectAnswer');
-let domAns = document.querySelectorAll('.cardAns');
-let containersQuiz = document.querySelector(".containerQuiz");
+buttonSubmit.addEventListener("click", submitQuiz);
 displayQuestions();
