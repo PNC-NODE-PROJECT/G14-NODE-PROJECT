@@ -338,7 +338,7 @@ ul h2 {
     border: 1px solid rgb(70, 98, 255);
     border-top: 3px solid rgb(70, 98, 255);
     border-radius: 15px;
-    background-color:#eee;
+    background-color:white;
     margin-top: 10px;
     margin-left: 15%;
     padding: 10px;
@@ -350,7 +350,7 @@ ul h2 {
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: #fff;
+    background-color: white;
 }
 
 .header_Quiz {
@@ -360,8 +360,8 @@ ul h2 {
     margin: auto;
     border:1px solid rgb(70, 98, 255);
     border-radius: 5px;
-    border-top: 3px solid rgb(70, 98, 255);
-    background-color: white;
+    border-top: 3px solid rgb(120, 141, 255);
+    background-color: rgb(70, 98, 255);
     color: rgb(6, 6, 6);
 }
 
@@ -385,7 +385,7 @@ select {
     border-radius:15px;
     margin-left: 65%;
     margin-top: 10px;
-    color: #fff;
+    color: white;
 
 
 }

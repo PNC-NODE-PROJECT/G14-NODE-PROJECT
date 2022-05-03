@@ -9,7 +9,7 @@ dataOfQuiz = [];
 
 //___________________Display Question_______________________________
 function refreshDomElement(questions) {
-    while(getContainer.firstChild){
+    while (getContainer.firstChild) {
         getContainer.removeChild(getContainer.lastChild)
     }
     for (let quesion of questions) {
@@ -74,11 +74,12 @@ function displayQuestions() {
 //_____________Play quiz_______________________
 
 let containersQuiz = document.querySelector(".containersQuiz");
+
 function playQuiz(questions) {
-    while(containersQuiz.firstChild){
+    while (containersQuiz.firstChild) {
         containersQuiz.removeChild(containersQuiz.lastChild);
     }
-    for (let i=0; i< questions.length; i++) {
+    for (let i = 0; i < questions.length; i++) {
         let index = i + 1;
         let containerQuestion = document.createElement("div");
         containerQuestion.className = "containerQuestions";
@@ -90,7 +91,7 @@ function playQuiz(questions) {
         answer.className = "answers";
         let label1 = document.createElement("label");
         let p1 = document.createElement("p");
-        p1.textContent =  questions[i].answers["a"];
+        p1.textContent = questions[i].answers["a"];
         let answer1 = document.createElement("input");
         p1.id = "a" + index
         answer1.setAttribute("type", "radio");
@@ -101,7 +102,7 @@ function playQuiz(questions) {
         let label2 = document.createElement("label");
         let p2 = document.createElement("p");
         p2.id = "b" + index
-        p2.textContent =  questions[i].answers["b"];
+        p2.textContent = questions[i].answers["b"];
         answer2.setAttribute("type", "radio");
         answer2.setAttribute("name", questions[i].id);
         answer2.setAttribute("value", "b");
@@ -109,17 +110,17 @@ function playQuiz(questions) {
         let answer3 = document.createElement("input");
         let label3 = document.createElement("label");
         let p3 = document.createElement("p");
-        p3.textContent =  questions[i].answers["c"];
+        p3.textContent = questions[i].answers["c"];
         p3.id = "c" + index
         answer3.setAttribute("type", "radio");
         answer3.setAttribute("name", questions[i].id);
         answer3.setAttribute("value", "c");
-        
+
         let answer4 = document.createElement("input");
         let label4 = document.createElement("label");
         let p4 = document.createElement("p");
         p4.id = "d" + index
-        p4.textContent =  questions[i].answers["d"];
+        p4.textContent = questions[i].answers["d"];
         answer4.setAttribute("type", "radio");
         answer4.setAttribute("name", questions[i].id);
         answer4.setAttribute("value", "d");
@@ -155,30 +156,40 @@ function getQuestionToplay() {
 }
 
 //_____________________Add the question_________________________________
-function add() {
+function add(event) {
+  
     let url = "/api/questions/create";
-    let question = "Question : " + questionAdd.value;
-    let answer1 = "A : " + answerAdd1.value;
-    let answer2 = "B : " + answerAdd2.value;
-    let answer3 = "C : " + answerAdd3.value;
-    let answer4 = "D : " + answerAdd4.value;
+    let question =  questionAdd.value;
+    let answer1 =  answerAdd1.value;
+    let answer2 =  answerAdd2.value;
+    let answer3 =  answerAdd3.value;
+    let answer4 =  answerAdd4.value;
     let corrected = correctAn.value;
-    let body = {
-        questionTitle: question,
-        answers: {
-            a: answer1,
-            b: answer2,
-            c: answer3,
-            d: answer4
-        },
-        correctAnswer: corrected
-    }
-    axios.post(url, body)
+   
+    if(question===""|| answer1===""||answer2===""||answer3===""||answer4==""||corrected===""){
+        window.alert("Please will all the input");
+        console.log("question", question)
+        event.preventDefault();
+    }else{
+        let body = {
+            questionTitle: "Question : " + question,
+            answers: {
+                a: "A : " +answer1,
+                b: "B : " +answer2,
+                c: "C : " +answer3,
+                d: "D : " +answer4
+            },
+            correctAnswer: corrected
+        }
+        axios.post(url, body)
         .then((result) => {
             console.log(body);
         })
 
-    
+    }
+   
+        
+
 }
 //______________Delete the question_____________
 function deleteQ(event) {
@@ -204,8 +215,8 @@ function editQ(id) {
     answer3 = answerAdd3.value;
     answer4 = answerAdd4.value;
     corrected = correctAn.value;
-    
-    if(question != "" && answer1 != "" && answer2 != "" && answer3 != "" && answer4 != ""){
+
+    if (question != "" && answer1 != "" && answer2 != "" && answer3 != "" && answer4 != "") {
         let body = {
             questionTitle: question,
             answers: {
@@ -270,7 +281,7 @@ function computeScore(answers) {
                 let i = 1;
                 for (let k = 0; k < array_questions.length; k++) {
                     let id = array_user_ans[k];
-                    let iid = "#" + id +i;
+                    let iid = "#" + id + i;
                     console.log(iid);
                     if (array_questions[k].correctAnswer === array_user_ans[k]) {
                         scoreusers++;
@@ -278,14 +289,13 @@ function computeScore(answers) {
                         let a = document.querySelector(iid);
                         console.log(a);
                         a.style.color = "green";
-                    } 
-                    else{
+                    } else {
                         let a = document.querySelector(iid);
                         console.log(a);
                         a.style.color = "red";
                     }
                     i += 1;
-                    
+
                 }
                 showScoreForUser.style.display = "block";
                 displayUserName.textContent = getUserPlay.value;
@@ -353,12 +363,12 @@ btnSubmit.textContent = "Submit";
 document.body.appendChild(btnSubmit);
 
 //___________show correction_____________
-function showCorrection(){
+function showCorrection() {
     inputUsersName.style.display = "block";
     title.style.display = "none";
-    nav.style.display = "none";   
+    nav.style.display = "none";
     showScoreForUser.style.display = "none";
-    buttonShowCorrections.style.display = "none";
+    // buttonShowCorrections.style.display = "none";
 }
 // ________________________Main________________________
 let startQuiz = document.querySelector("#startQuiz");

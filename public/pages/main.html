@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body id="getBody">
+    <nav class="navbar">
+        <ul>
+            <img src="../images/pnc.png" alt="">
+        </ul>
+        <ul id="menu">
+            <li class="active" id="create_question"><a href="main.html">Edit Quiz</a></li>
+            <li id="play_quiz"><a href="" onclick="getQuestionToplay()">Play quiz</a></li>
+        </ul>
+    </nav>
+    <button id="btnAdd">Add Question</button>
+    <form class="formToAdd">
+        <label id="label-question">Question </label>
+        <input type="text" name="questiontext" id="questiontext" placeholder="fill your question...">
+        <br>
+        <div id="answer-container">
+            <label class="label-answer"></label>
+            <input type="hidden" name="hidden" id="hidden">
+            <label class="label-answer">A1</label>
+            <input type="text" name="answer1" id="answer1" placeholder="first answer...">
+            <br>
+            <label class="label-answer">B</label>
+            <input type="text" name="answer2" id="answer2" placeholder="second answer...">
+            <br>
+            <label class="label-answer">C</label>
+            <input type="text" name="answer3" id="answer3" placeholder="third answer...">
+            <br>
+            <label class="label-answer">D</label>
+            <input type="text" name="answer4" id="answer4" placeholder="fourth answer...">
+        </div>
+        <br>
+
+        <br>
+        <label class="label-answer" for="">Select correct answer:</label>
+        <select class="label-answer" name="corectAnswer" id="corectAnswer">
+            <option class="label-answer" value="a" id="option1">A</option>
+            <option class="label-answer" value="b" id="option2">B</option>
+            <option class="label-answer" value="c" id="option3">C</option>
+            <option class="label-answer" value="d" id="option4">D</option>
+        </select>
+        <br>
+        <div class="group-btn">
+            <button class="addlist">Add to list</button>
+            <button class="btn-edit">Edit</button>
+            <button id="cancel">cancel</button>
+        </div>
+
+    </form>
+    <!-- User Name For input their name -->
+    <div id="container"></div>
+    <div class="userName">
+        <div class="title">
+            <h2>Your Name </h2>
+            <input type="text" class="name" name="name" placeholder="Fill your name">
+        </div>
+        <div class="containersQuiz">
+
+        </div>
+    </div>
+    <div class="header">
+
+        <div class="header_Quiz">
+            <div class="nameOfUser">
+                <h3>Your Name: </h3>
+                <h3 class="getUserName"></h3>
+            </div>
+            <div class="userScore">
+                <h3>Your Score: </h3>
+                <h3 class="score"> 0</h3>
+            </div>
+
+
+        </div>
+
+        <button class="showCorrection">show correction</button>
+    </div>
+    <div class="containerQuiz">
+
+    </div>
+
+</body>
+<script src="../js/main.js"></script>
+
+</html>
