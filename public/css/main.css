@@ -313,21 +313,35 @@ ul h2 {
     height: 5vh;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background-color: #000000;
+    background-color: rgb(70, 98, 255);
     padding: 10px;
     margin-bottom: 1px;
 }
 
 .title input[type="text"] {
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    
     padding: 10px;
     outline: none;
     border: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     width: 97.4%;
-    color: #fff;
+    color: rgb(240, 232, 232);
     font-size: 20px;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(70, 98, 255);
+}
+
+
+/* //play quiz stylesheet */
+.containerQuestions{
+    width: 70%;
+    border: 1px solid rgb(70, 98, 255);
+    border-top: 3px solid rgb(70, 98, 255);
+    border-radius: 15px;
+    background-color:#eee;
+    margin-top: 10px;
+    margin-left: 15%;
+    padding: 10px;
 }
 
 /* ___Score Quiz______________________ */
@@ -340,21 +354,22 @@ ul h2 {
 }
 
 .header_Quiz {
-    height: 20vh;
+    width: 50%;
+    height: 50vh;
     display: block;
     margin: auto;
-    justify-content: center;
-    align-items: center;
+    border:1px solid rgb(70, 98, 255);
     border-radius: 5px;
-    background-color: #0f4efa;
-    color: #fff;
-}
-.nameOfUser{
-    display: flex;
+    border-top: 3px solid rgb(70, 98, 255);
+    background-color: white;
+    color: rgb(6, 6, 6);
 }
 
-.userScore {
+.nameOfUser, .userScore{
     display: flex;
+    font-size: 20px;
+    justify-content:center;
+    align-items: center;
 }
 
 option,
@@ -362,15 +377,34 @@ select {
     width: 50%;
 }
 
+.showCorrection{
+    width: 10%;
+    padding: 15px;
+    background-color:rgb(70, 98, 255);
+    border: none;
+    border-radius:15px;
+    margin-left: 65%;
+    margin-top: 10px;
+    color: #fff;
+
+
+}
+
 /* _______Button Submit_________________________ */
 .btn-submit {
     width: 10%;
     font-size: 20px;
-    margin-left: 70%;
+    margin-left: 63%;
     padding: 1%;
     margin-bottom: 5%;
+    background-color:rgb(70, 98, 255);
 }
 
 .active {
     border-bottom: rgb(70, 98, 255) solid 5px;
+}
+
+label{
+    display:flex;
+
 }

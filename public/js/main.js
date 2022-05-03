@@ -9,6 +9,9 @@ dataOfQuiz = [];
 
 //___________________Display Question_______________________________
 function refreshDomElement(questions) {
+    while(getContainer.firstChild){
+        getContainer.removeChild(getContainer.lastChild)
+    }
     for (let quesion of questions) {
         let cardBox = document.createElement('div');
         cardBox.className = "cardBox";
@@ -70,32 +73,75 @@ function displayQuestions() {
 
 //_____________Play quiz_______________________
 
-function playQuiz(questions) { 
-    let containersQuiz = document.createElement("div");
-    containersQuiz.className = "containersQuiz";
-    inputUsersName.appendChild(containersQuiz);
-
-    for (let question of questions) {
+let containersQuiz = document.querySelector(".containersQuiz");
+function playQuiz(questions) {
+    while(containersQuiz.firstChild){
+        containersQuiz.removeChild(containersQuiz.lastChild);
+    }
+    for (let i=0; i< questions.length; i++) {
+        let index = i + 1;
+        let containerQuestion = document.createElement("div");
+        containerQuestion.className = "containerQuestions";
         let domQuestion = document.createElement("h3");
-        domQuestion.innerHTML = question.questionTitle;
-        containersQuiz.appendChild(domQuestion);
+        domQuestion.innerHTML = questions[i].questionTitle;
+        containerQuestion.appendChild(domQuestion);
 
-        let domAnswers = question.answers;
-        console.log(domAnswers);
-        for (let answer in domAnswers) {
-            let ol = document.createElement("ol");
-            containersQuiz.appendChild(ol);
-            let li = document.createElement("li");
-            ol.appendChild(li);
-            let radio = document.createElement("input");
-            radio.setAttribute("type", "radio");
-            radio.setAttribute("name", question.id);
-            radio.setAttribute("value", answer);
-            li.appendChild(radio);
-            let label = document.createElement("label");
-            label.textContent = domAnswers[answer];
-            li.appendChild(label)
-        }
+        let answer = document.createElement("div");
+        answer.className = "answers";
+        let label1 = document.createElement("label");
+        let p1 = document.createElement("p");
+        p1.textContent =  questions[i].answers["a"];
+        let answer1 = document.createElement("input");
+        p1.id = "a" + index
+        answer1.setAttribute("type", "radio");
+        answer1.setAttribute("name", questions[i].id);
+        answer1.setAttribute("value", "a");
+
+        let answer2 = document.createElement("input");
+        let label2 = document.createElement("label");
+        let p2 = document.createElement("p");
+        p2.id = "b" + index
+        p2.textContent =  questions[i].answers["b"];
+        answer2.setAttribute("type", "radio");
+        answer2.setAttribute("name", questions[i].id);
+        answer2.setAttribute("value", "b");
+
+        let answer3 = document.createElement("input");
+        let label3 = document.createElement("label");
+        let p3 = document.createElement("p");
+        p3.textContent =  questions[i].answers["c"];
+        p3.id = "c" + index
+        answer3.setAttribute("type", "radio");
+        answer3.setAttribute("name", questions[i].id);
+        answer3.setAttribute("value", "c");
+        
+        let answer4 = document.createElement("input");
+        let label4 = document.createElement("label");
+        let p4 = document.createElement("p");
+        p4.id = "d" + index
+        p4.textContent =  questions[i].answers["d"];
+        answer4.setAttribute("type", "radio");
+        answer4.setAttribute("name", questions[i].id);
+        answer4.setAttribute("value", "d");
+
+        label1.appendChild(answer1);
+        answer.appendChild(label1);
+        label1.appendChild(p1);
+
+        label2.appendChild(answer2);
+        answer.appendChild(label2);
+        label2.appendChild(p2);
+
+        label3.appendChild(answer3);
+        answer.appendChild(label3);
+        label3.appendChild(p3);
+
+        label4.appendChild(answer4);
+        answer.appendChild(label4);
+        label4.appendChild(p4);
+        containerQuestion.appendChild(answer);
+        containersQuiz.appendChild(containerQuestion)
+
     }
 }
 
@@ -111,17 +157,28 @@ function getQuestionToplay() {
 //_____________________Add the question_________________________________
 function add() {
     let url = "/api/questions/create";
-    let question ="Question : "+ questionAdd.value;
-    let answer1 = "A : "+answerAdd1.value;
-    let answer2 = "B : "+answerAdd2.value;
-    let answer3 = "C : "+answerAdd3.value;
-    let answer4 = "D : "+answerAdd4.value;
+    let question = "Question : " + questionAdd.value;
+    let answer1 = "A : " + answerAdd1.value;
+    let answer2 = "B : " + answerAdd2.value;
+    let answer3 = "C : " + answerAdd3.value;
+    let answer4 = "D : " + answerAdd4.value;
     let corrected = correctAn.value;
-    let body = { questionTitle: question, answers: { a: answer1, b: answer2, c: answer3, d: answer4 }, correctAnswer: corrected }
+    let body = {
+        questionTitle: question,
+        answers: {
+            a: answer1,
+            b: answer2,
+            c: answer3,
+            d: answer4
+        },
+        correctAnswer: corrected
+    }
     axios.post(url, body)
         .then((result) => {
             console.log(body);
         })
+
+    
 }
 //______________Delete the question_____________
 function deleteQ(event) {
@@ -131,29 +188,40 @@ function deleteQ(event) {
         axios.delete(url)
             .then((results) => {
                 console.log(results);
+                displayQuestions()
             })
     }
 }
 // _____________Edit the question____________
 btnEdit = document.querySelector('.btn-edit');
 hide(btnEdit)
+
 function editQ(id) {
     let URL = "/api/questions/edit/" + id;
-    for (let datas of dataOfQuiz) {
-        question = questionAdd.value;
-        answer1 = answerAdd1.value;
-        answer2 = answerAdd2.value;
-        answer3 = answerAdd3.value;
-        answer4 = answerAdd4.value;
-        corrected =correctAn.value;
+    question = questionAdd.value;
+    answer1 = answerAdd1.value;
+    answer2 = answerAdd2.value;
+    answer3 = answerAdd3.value;
+    answer4 = answerAdd4.value;
+    corrected = correctAn.value;
+    
+    if(question != "" && answer1 != "" && answer2 != "" && answer3 != "" && answer4 != ""){
+        let body = {
+            questionTitle: question,
+            answers: {
+                a: answer1,
+                b: answer2,
+                c: answer3,
+                d: answer4
+            },
+            correctAnswer: corrected
+        }
+        axios.patch(URL, body).then((result) => {
+            console.log(result);
+        })
     }
-    let body = {questionTitle: question,
-        answers:{a: answer1,b:answer2,c:answer3,d:answer4},
-        correctAnswer: corrected}
-    axios.patch(URL, body).then((result) => {
-        console.log(result);
-    })
 }
+
 function showEditForm(event) {
     if (event.target.id === "edit") {
         let id = event.target.parentElement.parentElement.id;
@@ -181,36 +249,55 @@ function showEditForm(event) {
 
 //___________________Show score__________________________________
 let scoreusers = 0
-function computeScore(answers){
+
+function computeScore(answers) {
     let url = "http://localhost:80/api/questions";
     axios.get(url)
-    .then((response) => {
-        let array_questions = response.data;
-        let score = document.querySelector(".score");
-        let labels = document.querySelectorAll('input[type="radio"]');
-        let userChoice = 0;
-        let array_user_ans = []
-        for(let i = 0; i<labels.length; i++) {
-            if (labels[i].checked) { 
-                userChoice ++
-                array_user_ans.push(labels[i].value);
-                console.log(labels[i].value);
-            }
-        }
-        if (userChoice === array_questions.length){
-            for(let k = 0;k<array_questions.length;k++){
-                if (array_questions[k].correctAnswer === array_user_ans[k]){
-                    scoreusers ++;
-                    score.textContent = scoreusers;
+        .then((response) => {
+            let array_questions = response.data;
+            let score = document.querySelector(".score");
+            let labels = document.querySelectorAll('input[type="radio"]');
+            let userChoice = 0;
+            let array_user_ans = []
+            for (let i = 0; i < labels.length; i++) {
+                if (labels[i].checked) {
+                    userChoice++
+                    array_user_ans.push(labels[i].value);
+                    console.log(labels[i].value);
                 }
             }
-            
-        }else{
-            alert("Should choose all questions")
-            array_user_ans = [];
-        }
-        console.log(scoreusers);
-    })
+            if (userChoice === array_questions.length) {
+                let i = 1;
+                for (let k = 0; k < array_questions.length; k++) {
+                    let id = array_user_ans[k];
+                    let iid = "#" + id +i;
+                    console.log(iid);
+                    if (array_questions[k].correctAnswer === array_user_ans[k]) {
+                        scoreusers++;
+                        score.textContent = scoreusers;
+                        let a = document.querySelector(iid);
+                        console.log(a);
+                        a.style.color = "green";
+                    } 
+                    else{
+                        let a = document.querySelector(iid);
+                        console.log(a);
+                        a.style.color = "red";
+                    }
+                    i += 1;
+                    
+                }
+                showScoreForUser.style.display = "block";
+                displayUserName.textContent = getUserPlay.value;
+                buttonSubmit.style.display = "none";
+                inputUsersName.style.display = "none";
+
+            } else {
+                alert("You should choose all questions")
+                array_user_ans = [];
+            }
+            console.log(scoreusers);
+        })
 }
 //_______________Show and hide __________________________________
 function showAndHide(event) {
@@ -221,7 +308,7 @@ function showAndHide(event) {
         addBtn.style.display = "block";
         formAdd.style.display = 'none';
         buttonSubmit.style.display = "none";
-        
+
         hide_Quiz.style.borderBottom = "5px solid";
         hide_Quiz.style.borderBottomColor = "#0E578C";
         show_Quiz.style.borderBottom = "none";
@@ -242,6 +329,7 @@ function showAndHide(event) {
         hide_Quiz.style.borderBottom = "none";
     }
 }
+
 function hideQuetionAndgQuiz(event) {
     event.preventDefault();
     var containers = document.querySelector('#container');
@@ -253,6 +341,7 @@ function hideQuetionAndgQuiz(event) {
     var message = document.querySelector('.alert');
     message.style.display = 'none';
 }
+
 function btnCancle(event) {
     event.preventDefault();
     getContainer.style.display = "block";
@@ -263,25 +352,28 @@ btnSubmit.classList.add('btn-submit');
 btnSubmit.textContent = "Submit";
 document.body.appendChild(btnSubmit);
 
-
-//________________________Submit quiz________________________
-function submitQuiz(){
-    showScoreForUser.style.display = "block";
-    displayUserName.textContent = getUserPlay.value;
-    console.log(displayUserName);
-    buttonSubmit.style.display = "none";
-    inputUsersName.style.display= "none";
+//___________show correction_____________
+function showCorrection(){
+    inputUsersName.style.display = "block";
+    title.style.display = "none";
+    nav.style.display = "none";   
+    showScoreForUser.style.display = "none";
+    buttonShowCorrections.style.display = "none";
 }
 // ________________________Main________________________
 let startQuiz = document.querySelector("#startQuiz");
+let nav = document.querySelector(".navbar");
+let getInput = document.querySelectorAll('input[type="radio"]');
 let hide_Quiz = document.getElementById("create_question");
 let show_Quiz = document.getElementById("play_quiz");
 let addBtn = document.getElementById("btnAdd");
 let formAdd = document.querySelector('.formToAdd');
 let addList = document.querySelector('.addlist');
+let title = document.querySelector('.title');
 let inputUsersName = document.querySelector(".userName");
 let showScoreForUser = document.querySelector(".header");
 let buttonSubmit = document.querySelector(".btn-submit");
+let buttonShowCorrections = document.querySelector(".showCorrection")
 let getUserPlay = document.querySelector('.name');
 let displayUserName = document.querySelector(".getUserName");
 let buttonCancle = document.querySelector("#cancel");
@@ -304,5 +396,6 @@ addBtn.addEventListener("click", hideQuetionAndgQuiz);
 addList.addEventListener("click", add);
 buttonCancle.addEventListener("clcik", btnCancle);
 buttonSubmit.addEventListener("click", computeScore);
-buttonSubmit.addEventListener("click", submitQuiz);
+buttonShowCorrections.addEventListener("click", showCorrection);
+// buttonSubmit.addEventListener("click", submitQuiz);
 displayQuestions();
