@@ -84,13 +84,17 @@ function playQuiz(questions) {
         let containerQuestion = document.createElement("div");
         containerQuestion.className = "containerQuestions";
         let domQuestion = document.createElement("h3");
+        domQuestion.className = "playQuizH3";
         domQuestion.innerHTML = questions[i].questionTitle;
         containerQuestion.appendChild(domQuestion);
 
         let answer = document.createElement("div");
         answer.className = "answers";
+        
         let label1 = document.createElement("label");
+        label1.className="playLabel1";
         let p1 = document.createElement("p");
+        p1.className ="playQuizA1";
         p1.textContent = questions[i].answers["a"];
         let answer1 = document.createElement("input");
         p1.id = "a" + index
@@ -100,7 +104,9 @@ function playQuiz(questions) {
 
         let answer2 = document.createElement("input");
         let label2 = document.createElement("label");
+        label2.className="playLabel2";
         let p2 = document.createElement("p");
+        p2.className ="playQuizA2";
         p2.id = "b" + index
         p2.textContent = questions[i].answers["b"];
         answer2.setAttribute("type", "radio");
@@ -109,7 +115,9 @@ function playQuiz(questions) {
 
         let answer3 = document.createElement("input");
         let label3 = document.createElement("label");
+        label3.className="playLabel3";
         let p3 = document.createElement("p");
+        p3.className ="playQuizA3";
         p3.textContent = questions[i].answers["c"];
         p3.id = "c" + index
         answer3.setAttribute("type", "radio");
@@ -118,7 +126,9 @@ function playQuiz(questions) {
 
         let answer4 = document.createElement("input");
         let label4 = document.createElement("label");
+        label4.className="playLabel4";
         let p4 = document.createElement("p");
+        p4.className ="playQuizA4";
         p4.id = "d" + index
         p4.textContent = questions[i].answers["d"];
         answer4.setAttribute("type", "radio");
@@ -318,7 +328,6 @@ function showAndHide(event) {
         addBtn.style.display = "block";
         formAdd.style.display = 'none';
         buttonSubmit.style.display = "none";
-
         hide_Quiz.style.borderBottom = "5px solid";
         hide_Quiz.style.borderBottomColor = "#0E578C";
         show_Quiz.style.borderBottom = "none";

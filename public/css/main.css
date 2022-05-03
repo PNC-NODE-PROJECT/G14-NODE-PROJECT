@@ -3,6 +3,34 @@
     padding: 0;
     font-family: sans-serif;
 }
+#startQuizImage{
+    background-image: url(../images/startImage.png);
+}
+#startTheQuiz {
+    font-size: 3rem;
+    background-color: white;
+    padding: 10px;
+    border: 1.5px solid rgb(5, 151, 229);
+    border-radius: 20px;
+    margin-left: 45%;
+    margin-top: 27%;
+
+}
+#getBody{
+    background-image: url(../images/quizHomeImage.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    
+}
+#startTheQuiz a {
+    text-decoration: none;
+}
+
+#startTheQuiz:hover {
+    background-color: rgb(5, 151, 229);
+    color: white;
+}
 
 /* __Menu__ */
 nav {
@@ -101,6 +129,7 @@ ul h2 {
     border-top: 5px solid rgb(70, 98, 255);
     border-top-left-radius: 3vh;
     border-top-right-radius: 3vh;
+    
 }
 
 .editDeleteBox {
@@ -291,6 +320,7 @@ ul h2 {
 }
 
 /* ___Play Quiz username____________________________________ */
+
 .userName {
     width: 64%;
     height: 300%;
@@ -319,7 +349,7 @@ ul h2 {
 }
 
 .title input[type="text"] {
-    
+
     padding: 10px;
     outline: none;
     border: none;
@@ -328,20 +358,31 @@ ul h2 {
     width: 97.4%;
     color: rgb(240, 232, 232);
     font-size: 20px;
-    background-color: rgb(70, 98, 255);
+}
+.playQuizH3{
+    background-color: rgb(192, 225, 255);
+    border: 1px solid rgb(70, 98, 255);
+    padding: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-left: 10px solid rgb(70, 98, 255);
+}
+.playLabel1,.playLabel2,.playLabel3,.playLabel4{
+    margin-top: 2%;
+    margin-bottom: 3%;
+    padding: 2%;
 }
 
-
 /* //play quiz stylesheet */
-.containerQuestions{
+.containerQuestions {
     width: 70%;
-    border: 1px solid rgb(70, 98, 255);
-    border-top: 3px solid rgb(70, 98, 255);
+    border: 2px solid rgb(70, 98, 255);
+    border-top: 5px solid rgb(70, 98, 255);
     border-radius: 15px;
-    background-color:white;
     margin-top: 10px;
     margin-left: 15%;
     padding: 10px;
+    margin-bottom: 50px;
 }
 
 /* ___Score Quiz______________________ */
@@ -350,7 +391,6 @@ ul h2 {
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: white;
 }
 
 .header_Quiz {
@@ -358,17 +398,24 @@ ul h2 {
     height: 50vh;
     display: block;
     margin: auto;
-    border:1px solid rgb(70, 98, 255);
+    border: 1px solid rgb(70, 98, 255);
     border-radius: 5px;
     border-top: 3px solid rgb(120, 141, 255);
-    background-color: rgb(70, 98, 255);
     color: rgb(6, 6, 6);
+    background-image: url(../images/theEnd.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 30%;
+
+
 }
 
-.nameOfUser, .userScore{
+.nameOfUser,
+.userScore {
     display: flex;
-    font-size: 20px;
-    justify-content:center;
+    font-size: 35px;
+    justify-content: center;
     align-items: center;
 }
 
@@ -377,12 +424,12 @@ select {
     width: 50%;
 }
 
-.showCorrection{
+.showCorrection {
     width: 10%;
     padding: 15px;
-    background-color:rgb(70, 98, 255);
+    background-color: rgb(70, 98, 255);
     border: none;
-    border-radius:15px;
+    border-radius: 15px;
     margin-left: 65%;
     margin-top: 10px;
     color: white;
@@ -397,14 +444,14 @@ select {
     margin-left: 63%;
     padding: 1%;
     margin-bottom: 5%;
-    background-color:rgb(70, 98, 255);
+    background-color: rgb(70, 98, 255);
 }
 
 .active {
     border-bottom: rgb(70, 98, 255) solid 5px;
 }
 
-label{
-    display:flex;
+label {
+    display: flex;
 
 }
