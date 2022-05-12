@@ -16,13 +16,7 @@
     margin-top: 27%;
 
 }
-#getBody{
-    background-image: url(../images/quizHomeImage.png);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
-    
-}
+
 #startTheQuiz a {
     text-decoration: none;
 }
@@ -133,19 +127,20 @@ ul h2 {
 }
 
 .editDeleteBox {
-    margin-top: 1%;
+    margin-top: 1px;
     width: 15%;
-    margin-right: -5%;
 }
 
 .editDeleteBox #edit {
-    margin-bottom: -5%;
-    color: green;
+    margin-top: 50px;
+    color: rgb(17, 13, 255);
+    font-size: 25px;
 }
 
 .editDeleteBox #delete {
     margin-left: 10%;
     color: rgb(210, 0, 0);
+    font-size: 25px;
 }
 
 /* ____Add Question_____________________________ */
@@ -285,6 +280,7 @@ ul h2 {
     cursor: pointer;
     color: #fff;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 }
 
 #questiontext,

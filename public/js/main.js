@@ -48,8 +48,8 @@ function refreshDomElement(questions) {
         deleteQuestion.className = "fa fa-trash";
         deleteQuestion.id = "delete";
         deleteQuestion.addEventListener("click", deleteQ);
+        
         editDeleteBox.appendChild(deleteQuestion);
-
         cardBox.appendChild(card);
         cardBox.appendChild(editDeleteBox);
         getContainer.appendChild(cardBox);
@@ -282,7 +282,7 @@ function computeScore(answers) {
             let array_user_ans = []
             for (let i = 0; i < labels.length; i++) {
                 if (labels[i].checked) {
-                    userChoice++
+                    userChoice ++
                     array_user_ans.push(labels[i].value);
                     console.log(labels[i].value);
                 }
