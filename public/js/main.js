@@ -157,8 +157,8 @@ function playQuiz(questions) {
 }
 
 function getQuestionToplay() {
-    let url = "http://localhost:80/api/questions";
-    axios.get(url)
+    // let url = "http://localhost:80/api/questions";
+    axios.get("/api/questions")
         .then((response) => {
             let data = response.data;
             playQuiz(data);
@@ -272,8 +272,8 @@ function showEditForm(event) {
 let scoreusers = 0
 
 function computeScore(answers) {
-    let url = "http://localhost:80/api/questions";
-    axios.get(url)
+    // let url = "http://localhost:80/api/queonstis";
+    axios.get("/api/questions")
         .then((response) => {
             let array_questions = response.data;
             let score = document.querySelector(".score");
